@@ -11,7 +11,8 @@ export default function App() {
   const action = [
     "tourne ton telephone a droite",
     "tourne ton telephone a gauche",
-    "laisse ton telephone droit"
+    "laisse ton telephone droit", 
+    "jp c'est le meilleur"
   ]
 
 
