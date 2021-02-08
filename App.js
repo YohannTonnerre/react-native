@@ -11,15 +11,15 @@ export default function App() {
   });
   const [subscription, setSubscription] = useState(null);
 
-  const _slow = () => {
+  const slow = () => {
     Gyroscope.setUpdateInterval(1000);
   };
 
-  const _fast = () => {
-    Gyroscope.setUpdateInterval(16);
+  const fast = () => {
+    Gyroscope.setUpdateInterval(100);
   };
 
-  const _subscribe = () => {
+  const subscribe = () => {
     setSubscription(
       Gyroscope.addListener(gyroscopeData => {
         setData(gyroscopeData);
@@ -27,14 +27,14 @@ export default function App() {
     );
   };
 
-  const _unsubscribe = () => {
+  const unsubscribe = () => {
     subscription && subscription.remove();
     setSubscription(null);
   };
 
   useEffect(() => {
-    _subscribe();
-    return () => _unsubscribe();
+    subscribe();
+    return () => unsubscribe();
   }, []);
 
   const { x, y, z } = data;
@@ -45,13 +45,13 @@ export default function App() {
         x: {round(x)} y: {round(y)} z: {round(z)}
       </Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={subscription ? _unsubscribe : _subscribe} style={styles.button}>
+        <TouchableOpacity onPress={subscription ? unsubscribe : subscribe} style={styles.button}>
           <Text>{subscription ? 'On' : 'Off'}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={_slow} style={[styles.button, styles.middleButton]}>
+        <TouchableOpacity onPress={slow} style={[styles.button, styles.middleButton]}>
           <Text>Slow</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={_fast} style={styles.button}>
+        <TouchableOpacity onPress={fast} style={styles.button}>
           <Text>Fast</Text>
         </TouchableOpacity>
       </View>
@@ -62,7 +62,7 @@ function round(n) {
   if (!n) {
     return 0;
   }
-  return Math.floor(n * 100) / 100;
+  return Math.floor(n * 100);
 }
 const styles = StyleSheet.create({
   container: {
