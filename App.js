@@ -7,6 +7,20 @@ export default function App() {
   const [data, setData] = useState({
     y: 0,
   });
+
+  const action = [
+    "tourne ton telephone a droite",
+    "tourne ton telephone a gauche",
+    "laisse ton telephone droit"
+  ]
+
+
+
+  const chooseAction = ()=>{
+    for(let i = 0; i<3; i++){
+      
+    }
+  }
   const [subscription, setSubscription] = useState(null);
 
   const slow = () => {
