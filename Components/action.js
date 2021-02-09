@@ -12,15 +12,25 @@ class Action extends React.Component{
         }
 
         this.action = [
-            "tourne ton téléphone à droite, ",
-            "tourne ton téléphone à gauche, ",
-            "laisse ton téléphone droit, ",
+            "tourne ton téléphone à droite ",
+            "tourne ton téléphone à gauche ",
+            "laisse ton téléphone droit ",
         ]
-        this.actionArray= [];
+        this.actionArray = 0;
 
-        for(let i = 0; i<3; i++){
-            this.actionArray.push(this.action[Math.floor(Math.random() * this.action.length)]);
-        }
+        this.counter = 0;
+
+        this.timer = setInterval(()=>{
+            this.counter++;
+            this.actionArray = this.action[Math.floor(Math.random() * this.action.length)];
+            this.setState({text : this.actionArray});
+            this.actionArray = 0 ;
+            if(this.counter >= 3){
+                this.counter = 0;
+                clearInterval(this.timer);
+            }
+            
+        },1000)
     }
 
     componentDidMount(){
@@ -29,8 +39,15 @@ class Action extends React.Component{
 
 
 
+    
+    
+
+
+
   
     render(){
+
+        
         return (
             <View style={styles.container}>
 
