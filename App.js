@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Value from './Components/yValue';
 import Action from './Components/action';
+import HomePage from './Components/HomePage';
 
 export default function App() {
   
@@ -11,6 +12,7 @@ export default function App() {
     <View style={styles.container}>
       <Value/>
       <Action/>
+      <HomePage/>
     </View>
   );
 }
