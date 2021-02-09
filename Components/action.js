@@ -12,9 +12,9 @@ class Action extends React.Component{
         }
 
         this.action = [
-            "tourne ton téléphone à droite ",
-            "tourne ton téléphone à gauche ",
-            "laisse ton téléphone droit ",
+            "DROITE!!!! ",
+            "GAUCHE!!!!",
+            "BOUGE PAS!!!!",
         ]
         this.actionArray = 0;
 
