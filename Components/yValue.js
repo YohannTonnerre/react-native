@@ -1,28 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Gyroscope } from 'expo-sensors';
+import { Accelerometer } from 'expo-sensors';
 
 export default function App() {
   const [data, setData] = useState({
-    y: 0,
+    x: 0,
   });
 
  
   const [subscription, setSubscription] = useState(null);
 
 
-    Gyroscope.setUpdateInterval(100);
+    Accelerometer.setUpdateInterval(1000);
 
 
 //   const fast = () => {
-//     Gyroscope.setUpdateInterval(100);
+//     Accelerometer.setUpdateInterval(100);
 //   };
 
   const subscribe = () => {
     setSubscription(
-      Gyroscope.addListener(gyroscopeData => {
-        setData(gyroscopeData);
+      Accelerometer.addListener(AccelerometerData => {
+        setData(AccelerometerData);
       })
     );
   };
@@ -37,12 +37,12 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  const { y } = data;
+  const { x } = data;
   return (
     <View>
-       <Text style={styles.text}>Gyroscope:</Text>
+       <Text style={styles.text}>Accelerometer:</Text>
       <Text style={styles.text}>
-         y: {round(y)}
+         x: {round(x)}
       </Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={subscription ? unsubscribe : subscribe} style={styles.button}>
