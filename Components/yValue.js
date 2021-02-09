@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
+import Action from './action';
+
 
 export default function App() {
   const [data, setData] = useState({
@@ -12,7 +14,7 @@ export default function App() {
   const [subscription, setSubscription] = useState(null);
 
 
-    Accelerometer.setUpdateInterval(1000);
+  Accelerometer.setUpdateInterval(1000);
 
 
 //   const fast = () => {
@@ -37,10 +39,12 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
+  
+
   const { x } = data;
   return (
     <View>
-       <Text style={styles.text}>Accelerometer:</Text>
+      <Text style={styles.text}>Accelerometer:</Text>
       <Text style={styles.text}>
          x: {round(x)}
       </Text>
@@ -50,6 +54,7 @@ export default function App() {
         </TouchableOpacity>
 
       </View>
+      <Action dataFromParent = {x}/>
     </View>
   );
 }
@@ -57,6 +62,9 @@ function round(n) {
   if (!n) {
     return 0;
   }
+
+  
+  
   return Math.floor(n * 100);
 }
 const styles = StyleSheet.create({
