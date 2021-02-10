@@ -29,11 +29,10 @@ class Action extends React.Component{
         this.timer = setInterval(()=>{
             this.counter++;
             this.actionDisplay = this.action[Math.floor(Math.random() * this.action.length)];
-            this.setState({text : this.actionDisplay});
+            this.setState({text : this.actionArray});
             this.actionArray.push(this.actionDisplay);
             this.actionDisplay = 0 ;
             if(this.counter >= 3){
-                alert(this.actionArray);
                 this.counter = 0;
                 clearInterval(this.timer);
             }
@@ -56,27 +55,29 @@ class Action extends React.Component{
         }
 
 
-        if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>70){
-            this.actionArray.splice(0,1);
-            if(this.actionArray.length == 0){
-                alert('t as gagné');
-            }
-        }
 
-        if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-70){
-            this.actionArray.splice(0,1);
-            if(this.actionArray.length == 0){
-                alert('t as gagné');
+        setTimeout(()=>{
+            if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>70){
+                this.actionArray.splice(0,1);
+                if(this.actionArray.length == 0){
+                    alert('t as gagné');
+                }
             }
-        }
 
-        if(this.actionArray[0] === "BOUGE PAS!!!!" && this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20){
-            this.actionArray.splice(0,1);
-            if(this.actionArray.length == 0){
-                alert('t as gagné');
+            if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-70){
+                this.actionArray.splice(0,1);
+                if(this.actionArray.length == 0){
+                    alert('t as gagné');
+                }
             }
-        }
 
+            if(this.actionArray[0] === "BOUGE PAS!!!!" && this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20){
+                this.actionArray.splice(0,1);
+                if(this.actionArray.length == 0){
+                    alert('t as gagné');
+                }
+            }
+        },4000)
         
         return (
             <View style={styles.container}>
