@@ -26,21 +26,27 @@ class Action extends React.Component{
         this.win = false;
         
 
-        this.timer = setInterval(()=>{
-            this.counter++;
-            this.actionDisplay = this.action[Math.floor(Math.random() * this.action.length)];
-            this.setState({text : this.actionArray});
-            this.actionArray.push(this.actionDisplay);
-            this.actionDisplay = 0 ;
-            if(this.counter >= 3){
-                this.counter = 0;
-                clearInterval(this.timer);
-            }
-        },1000)
+        this.play = ()=>{
+            this.counter = 0;
+            console.log(this.counter);
+            this.replay = setInterval(()=>{
+                this.counter++;
+                this.actionDisplay = this.action[Math.floor(Math.random() * this.action.length)];
+                this.setState({text : this.actionArray});
+                this.actionArray.push(this.actionDisplay);
+                this.actionDisplay = 0 ;
+                if(this.counter >= 3){
+                    this.counter = 0;
+                    clearInterval(this.replay);
+                }
+            },1000)
+        }
     }
 
     componentDidMount(){
         this.setState({text : this.actionDisplay});
+
+        this.play();
     }
 
     render(){
@@ -61,6 +67,7 @@ class Action extends React.Component{
                 this.actionArray.splice(0,1);
                 if(this.actionArray.length == 0){
                     alert('t as gagné');
+                    this.play();
                 }
             }
 
@@ -68,6 +75,7 @@ class Action extends React.Component{
                 this.actionArray.splice(0,1);
                 if(this.actionArray.length == 0){
                     alert('t as gagné');
+                    this.play();
                 }
             }
 
@@ -75,6 +83,7 @@ class Action extends React.Component{
                 this.actionArray.splice(0,1);
                 if(this.actionArray.length == 0){
                     alert('t as gagné');
+                    this.play();
                 }
             }
         },4000)
