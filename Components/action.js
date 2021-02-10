@@ -21,12 +21,14 @@ class Action extends React.Component{
         this.actionArray = [];
 
         this.counter = 0;
+        this.ready = true;
 
 
         this.win = false;
         
 
         this.play = ()=>{
+            
             this.counter = 0;
             console.log(this.counter);
             this.replay = setInterval(()=>{
@@ -50,43 +52,51 @@ class Action extends React.Component{
     }
 
     render(){
-        if(this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>70){
-            console.log("gauche");
-        }
-        if(this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-70){
-            console.log("droite");
-        }
-        if(this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20){
-            console.log("tu bouge pas");
-        }
-
-
-
         setTimeout(()=>{
-            if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>70){
-                this.actionArray.splice(0,1);
-                if(this.actionArray.length == 0){
-                    alert('t as gagné');
-                    this.play();
-                }
-            }
-
-            if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-70){
-                this.actionArray.splice(0,1);
-                if(this.actionArray.length == 0){
-                    alert('t as gagné');
-                    this.play();
-                }
-            }
-
-            if(this.actionArray[0] === "BOUGE PAS!!!!" && this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20){
-                this.actionArray.splice(0,1);
-                if(this.actionArray.length == 0){
-                    alert('t as gagné');
-                    this.play();
-                }
+            if(this.ready){
+                this.ready = false;
+                setTimeout(()=>{
+                    if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>70){
+                        this.actionArray.splice(0,1);
+                        if(this.actionArray.length == 0){
+                            this.play();
+                            setTimeout(()=>{
+                                this.ready = true;
+                            },4000)
+                        }
+                        else{
+                            this.ready = true;
+                        }
+                    }
+                    if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-70){
+                        this.actionArray.splice(0,1);
+                        if(this.actionArray.length == 0){
+                            this.play();
+                            setTimeout(()=>{
+                                this.ready = true;
+                            },4000)
+                        }
+                        else{
+                            this.ready = true;
+                        }
+                    }
+                    if(this.actionArray[0] === "BOUGE PAS!!!!" && this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20){
+                        this.actionArray.splice(0,1);
+                        if(this.actionArray.length == 0){
+                            this.play();
+                            setTimeout(()=>{
+                                this.ready = true;
+                            },4000)
+                        }
+                        else{
+                            this.ready = true;
+                        }
+                    }
+                },1000)
             }
         },4000)
+        
+        
         
         return (
             <View style={styles.container}>

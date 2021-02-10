@@ -14,7 +14,7 @@ export default function App() {
   const [subscription, setSubscription] = useState(null);
 
 
-  Accelerometer.setUpdateInterval(1000);
+  Accelerometer.setUpdateInterval(100);
 
 
 //   const fast = () => {
