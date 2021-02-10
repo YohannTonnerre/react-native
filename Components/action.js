@@ -13,7 +13,7 @@ class Action extends React.Component{
         }
 
         this.action = [
-            "DROITE!!!! ",
+            "DROITE!!!!",
             "GAUCHE!!!!",
             "BOUGE PAS!!!!",
         ]
@@ -21,6 +21,10 @@ class Action extends React.Component{
         this.actionArray = [];
 
         this.counter = 0;
+
+
+        this.win = false;
+        
 
         this.timer = setInterval(()=>{
             this.counter++;
@@ -36,8 +40,6 @@ class Action extends React.Component{
         },1000)
     }
 
-    
-
     componentDidMount(){
         this.setState({text : this.actionDisplay});
     }
@@ -52,9 +54,32 @@ class Action extends React.Component{
         if(this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20){
             console.log("tu bouge pas");
         }
+
+
+        if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>70){
+            this.actionArray.splice(0,1);
+            if(this.actionArray.length == 0){
+                alert('t as gagné');
+            }
+        }
+
+        if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-70){
+            this.actionArray.splice(0,1);
+            if(this.actionArray.length == 0){
+                alert('t as gagné');
+            }
+        }
+
+        if(this.actionArray[0] === "BOUGE PAS!!!!" && this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20){
+            this.actionArray.splice(0,1);
+            if(this.actionArray.length == 0){
+                alert('t as gagné');
+            }
+        }
+
+        
         return (
             <View style={styles.container}>
-
                 <Text style={styles.button}>{this.state.text}</Text>
             </View>
         );

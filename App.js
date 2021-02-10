@@ -19,8 +19,6 @@ import {createStackNavigator} from '@react-navigation/stack'
 // const Stack = createStackNavigator();
 
 export default function App() {
-
-
   return (
     <View style={styles.container}>
       {/* <NavigationContainer>
@@ -29,7 +27,6 @@ export default function App() {
         </Stack.Navigator>   
       </NavigationContainer> */}
       <Value/>
-      
       <HomePage/>
     </View>
   );
