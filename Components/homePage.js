@@ -12,10 +12,10 @@ class homePage extends React.Component{
        
         <View>
 
-            <Text  style={styles.homePage}>  </Text>
+            
             <TouchableOpacity style={styles.button}>
-            <Text style={styles.textButton}>JOUER</Text>
-           </TouchableOpacity>
+                <Text style={styles.textButton}>JOUER</Text>
+            </TouchableOpacity>
 
         </View>
     );
