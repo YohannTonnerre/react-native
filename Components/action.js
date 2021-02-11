@@ -25,6 +25,9 @@ class Action extends React.Component{
 
 
         this.win = false;
+
+        
+        this.i = 0
         
 
         this.play = ()=>{
@@ -52,49 +55,51 @@ class Action extends React.Component{
     }
 
     render(){
+
+        const spliceTab = ()=>{
+            this.actionArray.splice(0,1);
+            if(this.actionArray.length == 0){
+                this.win === true;
+                this.play();
+                setTimeout(()=>{
+                    this.ready = true;
+                },4000)
+            }
+            else{
+                this.ready = true;
+            }
+        }
         setTimeout(()=>{
+            this.win = false;
             if(this.ready){
                 this.ready = false;
                 setTimeout(()=>{
                     if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>70){
-                        this.actionArray.splice(0,1);
-                        if(this.actionArray.length == 0){
-                            this.play();
-                            setTimeout(()=>{
-                                this.ready = true;
-                            },4000)
-                        }
-                        else{
-                            this.ready = true;
-                        }
+                        spliceTab();
+                    }
+                    else if(this.actionArray[0] === "GAUCHE!!!!" && !(this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>70)){
+                        alert("looser");
                     }
                     if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-70){
-                        this.actionArray.splice(0,1);
-                        if(this.actionArray.length == 0){
-                            this.play();
-                            setTimeout(()=>{
-                                this.ready = true;
-                            },4000)
-                        }
-                        else{
-                            this.ready = true;
-                        }
+                        spliceTab();
+                    }
+                    else if(this.actionArray[0] === "DROITE!!!!" &&  !(this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-70)){
+                        alert("looser");
                     }
                     if(this.actionArray[0] === "BOUGE PAS!!!!" && this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20){
-                        this.actionArray.splice(0,1);
-                        if(this.actionArray.length == 0){
-                            this.play();
-                            setTimeout(()=>{
-                                this.ready = true;
-                            },4000)
-                        }
-                        else{
-                            this.ready = true;
-                        }
+                        spliceTab();
+                    }
+                    else if(this.actionArray[0] === "BOUGE PAS!!!!" && !(this.props.dataFromParent*100 < 20 && this.props.dataFromParent*100>-20)){
+                        alert("looser");
                     }
                 },1000)
-            }
+                
+
+                
+            }   
+          
         },4000)
+        
         
         
         

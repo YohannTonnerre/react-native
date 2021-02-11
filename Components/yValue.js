@@ -10,30 +10,32 @@ export default function App() {
     x: 0,
   });
 
- 
+  
   const [subscription, setSubscription] = useState(null);
 
-
+  // Frequence de refresh de l'affichage de l'accelerometre 
   Accelerometer.setUpdateInterval(100);
 
-
-//   const fast = () => {
-//     Accelerometer.setUpdateInterval(100);
-//   };
-
+  // function subscribe qui permet de mettre en 'on' le gyroscope
   const subscribe = () => {
     setSubscription(
+
+      // Observe les changements du gyroscope et change la valeur
       Accelerometer.addListener(AccelerometerData => {
         setData(AccelerometerData);
       })
     );
   };
 
+
+  // function unsubscribe qui permet de desactiver le gyroscope
   const unsubscribe = () => {
     subscription && subscription.remove();
     setSubscription(null);
   };
 
+
+  // equivalent à componentDidMount, componentDidUpdate, et componentWillUnmount.
   useEffect(() => {
     subscribe();
     return () => unsubscribe();
@@ -44,7 +46,7 @@ export default function App() {
   const { x } = data;
   return (
     <View>
-      <Text style={styles.text}>Accelerometer:</Text>
+      <Text style={styles.text}>Accelerometre:</Text>
       <Text style={styles.text}>
          x: {round(x)}
       </Text>
@@ -58,15 +60,19 @@ export default function App() {
     </View>
   );
 }
+
+
 function round(n) {
   if (!n) {
     return 0;
   }
-
-  
-  
   return Math.floor(n * 100);
 }
+
+
+
+
+
 const styles = StyleSheet.create({
   text: {
       color: '#fff',
