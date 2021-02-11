@@ -156,7 +156,7 @@ export default Action
     img: {
         resizeMode: "contain",
         height: 200,
-        width: 300,
+        width: 200,
         
     },
     imgContainer:{
