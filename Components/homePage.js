@@ -11,8 +11,6 @@ class homePage extends React.Component{
     return (
        
         <View>
-
-            <Text  style={styles.homePage}>  </Text>
             <TouchableOpacity style={styles.button}>
             <Text style={styles.textButton}>JOUER</Text>
            </TouchableOpacity>
@@ -38,5 +36,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         padding: 15,
     }
- });
+
+
+});
 
