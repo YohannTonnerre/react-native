@@ -11,7 +11,9 @@ class Action extends React.Component{
 
         this.state = {
             text: "action",
-            imageURL : require('../img/catcheur-milieu.png'),
+            imageURL : require('../img/fakeScreen.png'),
+            imageAction : require('../img/fakeScreen.png'),
+            playAgain : false,
         }
 
         this.action = [
@@ -32,42 +34,63 @@ class Action extends React.Component{
         this.i = 0;
 
 
-        this.Load_New_Image=(pos)=>{
+    }
+
+    componentDidMount(){
+        this.setState({text : this.actionDisplay});
+        this.play();
+    }
+
+    render(){
+        const hideAndshow = ()=>{
+            this.setState({text : 0});
+            this.setState({
+                playAgain : true,
+            });
+        }
+
+        const Load_New_Image=(pos)=>{
             if(pos === "gauche"){
                 this.setState({
-            
                     imageURL : require(`../img/catcheur-gauche.png`),
-            
+                    imageAction : require(`../img/gauche.png`),
                 })
             }
             if(pos === "droite"){
                 this.setState({
-            
                     imageURL : require(`../img/catcheur-droite.png`),
-            
+                    imageAction : require(`../img/droite.png`),
                 })
             }
             if(pos === "milieu"){
                 this.setState({
-            
                     imageURL : require(`../img/catcheur-milieu.png`),
-            
+                    imageAction : require(`../img/milieu.png`),
                 })
-            }
-            
+            }           
+        }
+
+        this.playAgainFunction = ()=>{
+            this.actionArray = [];
+            this.setState({
+                playAgain : false,
+            });
+            this.play();
+            setTimeout(()=>{
+                this.ready = true;
+            },4000)
         }
         
 
         this.play = ()=>{
             
             this.counter = 0;
-            console.log(this.counter);
             this.replay = setInterval(()=>{
                 this.counter++;
                 this.actionDisplay = this.action[Math.floor(Math.random() * this.action.length)];
                 this.setState({text : this.actionArray});
                 this.actionArray.push(this.actionDisplay);
-                this.Load_New_Image(this.actionDisplay);
+                Load_New_Image(this.actionDisplay);
                 this.actionDisplay = 0 ;
                 if(this.counter >= 3){
                     this.counter = 0;
@@ -75,51 +98,53 @@ class Action extends React.Component{
                 }
             },1000)
         }
-    }
-
-    componentDidMount(){
-        this.setState({text : this.actionDisplay});
-
-        this.play();
-    }
-
-    render(){
-
+    
         const spliceTab = ()=>{
-            this.actionArray.splice(0,1);
-            if(this.actionArray.length == 0){
-                this.win === true;
-                this.play();
-                setTimeout(()=>{
+            setTimeout(()=>{
+                this.actionArray.splice(0,1);
+                if(this.actionArray.length == 0){
+                    this.win === true;
+                    this.play();
+                    setTimeout(()=>{
+                        this.ready = true;
+                    },4000)
+                }
+                else{
                     this.ready = true;
-                },4000)
-            }
-            else{
-                this.ready = true;
-            }
+                }
+            })
         }
         setTimeout(()=>{
             this.win = false;
             if(this.ready){
                 this.ready = false;
                 setTimeout(()=>{
-                    if(this.actionArray[0] === "gauche" && this.props.dataFromParent*100 < 120 && this.props.dataFromParent*100>40){
-                        spliceTab();
-                    }
-                    else if(this.actionArray[0] === "gauche" && !(this.props.dataFromParent*100 < 120 && this.props.dataFromParent*100>40)){
-                        alert("looser");
+                    if(this.actionArray[0] === "gauche"){
+                        if(this.props.dataFromParent*100 < 120 && this.props.dataFromParent*100>40){
+                            spliceTab();
+                        }
+                        else {
+                            alert(this.actionArray[0] + this.props.dataFromParent * 100);
+                            hideAndshow();
+                        }
                     }
                     if(this.actionArray[0] === "droite" && this.props.dataFromParent*100 > -120 && this.props.dataFromParent*100<-40){
-                        spliceTab();
+                        if(this.props.dataFromParent*100 > -120 && this.props.dataFromParent*100<-40){
+                            spliceTab();
+                        }
+                        else {
+                            alert(this.actionArray[0] + this.props.dataFromParent * 100);
+                            hideAndshow();
+                        }
                     }
-                    else if(this.actionArray[0] === "droite" &&  !(this.props.dataFromParent*120 > -100 && this.props.dataFromParent*100<-40)){
-                        alert("looser");
-                    }
-                    if(this.actionArray[0] === "milieu" && this.props.dataFromParent*100 < 30 && this.props.dataFromParent*100>-30){
-                        spliceTab();
-                    }
-                    else if(this.actionArray[0] === "milieu" && !(this.props.dataFromParent*100 < 30 && this.props.dataFromParent*100>-30)){
-                        alert("looser");
+                    if(this.actionArray[0] === "milieu"){
+                        if(this.props.dataFromParent*100 < 30 && this.props.dataFromParent*100>-30){
+                            spliceTab();
+                        }
+                        else{
+                            alert(this.actionArray[0] + this.props.dataFromParent * 100);
+                            hideAndshow();
+                        }
                     }
                 },1000)    
             }   
@@ -129,11 +154,22 @@ class Action extends React.Component{
         
         
         return (
+            
             <View style={styles.container}>
+                
                 <Text style={styles.button}>{this.state.text}</Text>
+                
                 <View style={styles.imgContainer}>
+                    <Image style={styles.img} source={this.state.imageAction}/>
                     <Image style={styles.img} source={this.state.imageURL} />
                 </View>
+                {this.state.playAgain ?
+                <View>
+                    <TouchableOpacity onPress={this.playAgainFunction} style={styles.button}>
+                        <Text style={styles.textButton}>REJOUER</Text>
+                    </TouchableOpacity> 
+                </View>: null
+                }
             </View>
         );
     }
