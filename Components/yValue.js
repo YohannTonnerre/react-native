@@ -46,10 +46,10 @@ export default function App() {
   const { x } = data;
   return (
     <View>
-      <Text style={styles.text}>Accelerometre:</Text>
+      {/* <Text style={styles.text}>Accelerometre:</Text>
       <Text style={styles.text}>
          x: {round(x)}
-      </Text>
+      </Text> */}
       <View style={styles.buttonContainer}>
         {/* <TouchableOpacity onPress={subscription ? unsubscribe : subscribe} style={styles.button}>
           <Text style={styles.textButton}>{subscription ? 'On' : 'Off'}</Text>

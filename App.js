@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {  StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import Value from './Components/yValue';
 import Action from './Components/action';
 import HomePage from './Components/homePage';
@@ -8,28 +8,31 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
 
 
-// function HomeScreen(){
-//   return(
-//     <View>
-//       <Text>Home Screen</Text>
-//     </View>
-//   )
-// }
 
-// const Stack = createStackNavigator();
+const Stack = createStackNavigator();
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      {/* <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen}/>
-        </Stack.Navigator>   
-      </NavigationContainer> */}
-      <Value/>
-      <HomePage/>
-    </View>
-  );
+
+class App extends React.Component{
+  constructor(props){
+      super(props);
+  }
+
+  
+
+
+  render(){
+    return (
+      // <NavigationContainer>
+      //     <Stack.Navigator initialRouteName="HomePage">
+      //         <Stack.Screen name="HomePage" component={HomePage}></Stack.Screen>
+      //         <Stack.Screen name="Value" component={Value}></Stack.Screen>
+      //     </Stack.Navigator>
+      // </NavigationContainer>
+      <View style={styles.container}>
+          <Value/>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -40,3 +43,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+
+export default App;
+
+

@@ -14,6 +14,9 @@ class Action extends React.Component{
             imageURL : require('../img/fakeScreen.png'),
             imageAction : require('../img/fakeScreen.png'),
             playAgain : false,
+            visible : 1,
+            score: 0,
+            bestScore: 0,
         }
 
         this.action = [
@@ -26,7 +29,6 @@ class Action extends React.Component{
 
         this.counter = 0;
         this.ready = true;
-
 
         this.win = false;
 
@@ -43,13 +45,16 @@ class Action extends React.Component{
 
     render(){
         const hideAndshow = ()=>{
-            this.setState({text : 0});
+            this.setState({text : 'perdu'});
             this.setState({
                 playAgain : true,
             });
         }
 
         const Load_New_Image=(pos)=>{
+            this.setState({
+                visible : 0,
+            });
             if(pos === "gauche"){
                 this.setState({
                     imageURL : require(`../img/catcheur-gauche.png`),
@@ -67,13 +72,19 @@ class Action extends React.Component{
                     imageURL : require(`../img/catcheur-milieu.png`),
                     imageAction : require(`../img/milieu.png`),
                 })
-            }           
+            } 
+            setTimeout(()=>{
+                this.setState({
+                    visible : 1,
+                });
+            },100)          
         }
 
         this.playAgainFunction = ()=>{
             this.actionArray = [];
             this.setState({
                 playAgain : false,
+                score : 0,
             });
             this.play();
             setTimeout(()=>{
@@ -104,6 +115,12 @@ class Action extends React.Component{
                 this.actionArray.splice(0,1);
                 if(this.actionArray.length == 0){
                     this.win === true;
+                    this.setState({score : this.state.score + 1});
+                    if(this.state.score>this.state.bestScore){
+                        
+                        this.setState({bestScore : this.state.bestScore + 1});
+                    }
+                    console.log(this.state.score);
                     this.play();
                     setTimeout(()=>{
                         this.ready = true;
@@ -124,7 +141,6 @@ class Action extends React.Component{
                             spliceTab();
                         }
                         else {
-                            alert(this.actionArray[0] + this.props.dataFromParent * 100);
                             hideAndshow();
                         }
                     }
@@ -133,7 +149,6 @@ class Action extends React.Component{
                             spliceTab();
                         }
                         else {
-                            alert(this.actionArray[0] + this.props.dataFromParent * 100);
                             hideAndshow();
                         }
                     }
@@ -142,7 +157,6 @@ class Action extends React.Component{
                             spliceTab();
                         }
                         else{
-                            alert(this.actionArray[0] + this.props.dataFromParent * 100);
                             hideAndshow();
                         }
                     }
@@ -156,11 +170,13 @@ class Action extends React.Component{
         return (
             
             <View style={styles.container}>
-                
+                <Text style={styles.score}>score: {this.state.score}</Text>
+                <Text style={styles.meilleurScore}>meilleur score: {this.state.bestScore}</Text>
                 <Text style={styles.button}>{this.state.text}</Text>
                 
                 <View style={styles.imgContainer}>
-                    <Image style={styles.img} source={this.state.imageAction}/>
+                    <Image opacity={this.state.visible} style={styles.imgText} source={this.state.imageAction}/>
+                    
                     <Image style={styles.img} source={this.state.imageURL} />
                 </View>
                 {this.state.playAgain ?
@@ -189,14 +205,32 @@ export default Action
         color: '#000',
         fontSize: 35,
     },
-    img: {
+    imgText: {
         resizeMode: "contain",
         height: 200,
-        width: 200,
+        width: 300,
+        
+    },
+    img: {
+        resizeMode: "cover",
+        height: 300,
+        width: 300,
         
     },
     imgContainer:{
         alignItems: "center", 
         justifyContent: 'center',
-    }
+    },
+    score : {
+        position: 'absolute',
+        left:     0,
+        top:      0,
+        color: 'white',
+    },
+    meilleurScore : {
+        position: 'absolute',
+        left:     0,
+        top:      20,
+        color: 'white',
+    },
     });
