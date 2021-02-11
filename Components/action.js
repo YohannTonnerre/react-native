@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image } from 'react-native'
 
 
 class Action extends React.Component{
@@ -10,12 +11,13 @@ class Action extends React.Component{
 
         this.state = {
             text: "action",
+            imageURL : require('../img/catcheur-milieu.png'),
         }
 
         this.action = [
-            "DROITE!!!!",
-            "GAUCHE!!!!",
-            "BOUGE PAS!!!!",
+            "droite",
+            "gauche",
+            "milieu",
         ]
         this.actionDisplay = 0;
         this.actionArray = [];
@@ -27,7 +29,33 @@ class Action extends React.Component{
         this.win = false;
 
         
-        this.i = 0
+        this.i = 0;
+
+
+        this.Load_New_Image=(pos)=>{
+            if(pos === "gauche"){
+                this.setState({
+            
+                    imageURL : require(`../img/catcheur-gauche.png`),
+            
+                })
+            }
+            if(pos === "droite"){
+                this.setState({
+            
+                    imageURL : require(`../img/catcheur-droite.png`),
+            
+                })
+            }
+            if(pos === "milieu"){
+                this.setState({
+            
+                    imageURL : require(`../img/catcheur-milieu.png`),
+            
+                })
+            }
+            
+        }
         
 
         this.play = ()=>{
@@ -39,6 +67,7 @@ class Action extends React.Component{
                 this.actionDisplay = this.action[Math.floor(Math.random() * this.action.length)];
                 this.setState({text : this.actionArray});
                 this.actionArray.push(this.actionDisplay);
+                this.Load_New_Image(this.actionDisplay);
                 this.actionDisplay = 0 ;
                 if(this.counter >= 3){
                     this.counter = 0;
@@ -74,30 +103,26 @@ class Action extends React.Component{
             if(this.ready){
                 this.ready = false;
                 setTimeout(()=>{
-                    if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 120 && this.props.dataFromParent*100>40){
+                    if(this.actionArray[0] === "gauche" && this.props.dataFromParent*100 < 120 && this.props.dataFromParent*100>40){
                         spliceTab();
                     }
-                    else if(this.actionArray[0] === "GAUCHE!!!!" && !(this.props.dataFromParent*100 < 120 && this.props.dataFromParent*100>40)){
+                    else if(this.actionArray[0] === "gauche" && !(this.props.dataFromParent*100 < 120 && this.props.dataFromParent*100>40)){
                         alert("looser");
                     }
-                    if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -120 && this.props.dataFromParent*100<-40){
+                    if(this.actionArray[0] === "droite" && this.props.dataFromParent*100 > -120 && this.props.dataFromParent*100<-40){
                         spliceTab();
                     }
-                    else if(this.actionArray[0] === "DROITE!!!!" &&  !(this.props.dataFromParent*120 > -100 && this.props.dataFromParent*100<-40)){
+                    else if(this.actionArray[0] === "droite" &&  !(this.props.dataFromParent*120 > -100 && this.props.dataFromParent*100<-40)){
                         alert("looser");
                     }
-                    if(this.actionArray[0] === "BOUGE PAS!!!!" && this.props.dataFromParent*100 < 30 && this.props.dataFromParent*100>-30){
+                    if(this.actionArray[0] === "milieu" && this.props.dataFromParent*100 < 30 && this.props.dataFromParent*100>-30){
                         spliceTab();
                     }
-                    else if(this.actionArray[0] === "BOUGE PAS!!!!" && !(this.props.dataFromParent*100 < 30 && this.props.dataFromParent*100>-30)){
+                    else if(this.actionArray[0] === "milieu" && !(this.props.dataFromParent*100 < 30 && this.props.dataFromParent*100>-30)){
                         alert("looser");
                     }
-                },1000)
-                
-
-                
+                },1000)    
             }   
-          
         },4000)
         
         
@@ -106,6 +131,9 @@ class Action extends React.Component{
         return (
             <View style={styles.container}>
                 <Text style={styles.button}>{this.state.text}</Text>
+                <View style={styles.imgContainer}>
+                    <Image style={styles.img} source={this.state.imageURL} />
+                </View>
             </View>
         );
     }
@@ -124,5 +152,15 @@ export default Action
     textButton: {
         color: '#000',
         fontSize: 35,
+    },
+    img: {
+        resizeMode: "contain",
+        height: 200,
+        width: 300,
+        
+    },
+    imgContainer:{
+        alignItems: "center", 
+        justifyContent: 'center',
     }
     });

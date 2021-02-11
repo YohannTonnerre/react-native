@@ -29,16 +29,16 @@ export default function App() {
 
 
   // function unsubscribe qui permet de desactiver le gyroscope
-  const unsubscribe = () => {
-    subscription && subscription.remove();
-    setSubscription(null);
-  };
+  // const unsubscribe = () => {
+  //   subscription && subscription.remove();
+  //   setSubscription(null);
+  // };
 
 
   // equivalent à componentDidMount, componentDidUpdate, et componentWillUnmount.
   useEffect(() => {
     subscribe();
-    return () => unsubscribe();
+    // return () => unsubscribe();
   }, []);
 
   
@@ -51,9 +51,9 @@ export default function App() {
          x: {round(x)}
       </Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={subscription ? unsubscribe : subscribe} style={styles.button}>
+        {/* <TouchableOpacity onPress={subscription ? unsubscribe : subscribe} style={styles.button}>
           <Text style={styles.textButton}>{subscription ? 'On' : 'Off'}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
       </View>
       <Action dataFromParent = {x}/>
