@@ -74,16 +74,16 @@ class Action extends React.Component{
             if(this.ready){
                 this.ready = false;
                 setTimeout(()=>{
-                    if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>30){
+                    if(this.actionArray[0] === "GAUCHE!!!!" && this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>31){
                         spliceTab();
                     }
-                    else if(this.actionArray[0] === "GAUCHE!!!!" && !(this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>30)){
+                    else if(this.actionArray[0] === "GAUCHE!!!!" && !(this.props.dataFromParent*100 < 100 && this.props.dataFromParent*100>31)){
                         alert("looser");
                     }
-                    if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-30){
+                    if(this.actionArray[0] === "DROITE!!!!" && this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-31){
                         spliceTab();
                     }
-                    else if(this.actionArray[0] === "DROITE!!!!" &&  !(this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-30)){
+                    else if(this.actionArray[0] === "DROITE!!!!" &&  !(this.props.dataFromParent*100 > -100 && this.props.dataFromParent*100<-31)){
                         alert("looser");
                     }
                     if(this.actionArray[0] === "BOUGE PAS!!!!" && this.props.dataFromParent*100 < 30 && this.props.dataFromParent*100>-30){
