@@ -46,7 +46,9 @@ export default function App() {
   const { x } = data;
   return (
     <View>
-      {/* <Text style={styles.text}>Accelerometre:</Text>
+      {
+         <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
+      /* <Text style={styles.text}>Accelerometre:</Text>
       <Text style={styles.text}>
          x: {round(x)}
       </Text> */}
