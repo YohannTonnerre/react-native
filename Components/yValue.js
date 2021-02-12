@@ -37,21 +37,6 @@ export default function App() {
   const { x } = data;
   return (
     <View>
-<<<<<<< HEAD
-      {
-         <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
-      /* <Text style={styles.text}>Accelerometre:</Text>
-      <Text style={styles.text}>
-         x: {round(x)}
-      </Text> */}
-      <View style={styles.buttonContainer}>
-        {/* <TouchableOpacity onPress={subscription ? unsubscribe : subscribe} style={styles.button}>
-          <Text style={styles.textButton}>{subscription ? 'On' : 'Off'}</Text>
-        </TouchableOpacity> */}
-
-      </View>
-=======
->>>>>>> 305db9faa54ec2903199d5f44dd5f6bf9cedf8f1
       <Action dataFromParent = {x}/>
     </View>
   );
