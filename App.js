@@ -4,12 +4,8 @@ import {  StyleSheet, Text, TouchableOpacity, View, Button,Image } from 'react-n
 import Value from './Components/yValue';
 import Action from './Components/action';
 import HomePage from './Components/homePage';
-import { NavigationContainer } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack'
 
 
-
-const Stack = createStackNavigator();
 
 
 class App extends React.Component{
@@ -22,16 +18,9 @@ class App extends React.Component{
 
   render(){
     return (
-      // <NavigationContainer>
-      //     <Stack.Navigator initialRouteName="HomePage">
-      //         <Stack.Screen name="HomePage" component={HomePage}></Stack.Screen>
-      //         <Stack.Screen name="Value" component={Value}></Stack.Screen>
-      //     </Stack.Navigator>
-      // </NavigationContainer>
       <View style={styles.container}>
         
         <Value/>
-          {/* <HomePage/> */}
       </View>
     );
   }

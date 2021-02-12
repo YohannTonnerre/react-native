@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {  StyleSheet, Text, TouchableOpacity, View, Vibration} from 'react-native';
 import { Image } from 'react-native'
 
 
@@ -17,6 +17,7 @@ class Action extends React.Component{
             visible : 1,
             score: 0,
             bestScore: 0,
+            vibrationDuration: 500,
         }
 
         this.action = [
@@ -40,6 +41,7 @@ class Action extends React.Component{
     render(){
         const hideAndshow = ()=>{
             this.setState({
+                
                 playAgain : true,
                 imageURL : require(`../img/catcheur-triste.png`),
                 imageAction : require(`../img/perdu.png`),
@@ -134,7 +136,9 @@ class Action extends React.Component{
                             spliceTab();
                         }
                         else {
+                            Vibration.vibrate(this.state.Vibrationduration);
                             hideAndshow();
+                            
                         }
                     }
                     if(this.actionArray[0] === "droite"){
@@ -142,6 +146,7 @@ class Action extends React.Component{
                             spliceTab();
                         }
                         else {
+                            Vibration.vibrate(this.state.Vibrationduration);
                             hideAndshow();
                         }
                     }
@@ -150,6 +155,7 @@ class Action extends React.Component{
                             spliceTab();
                         }
                         else{
+                            Vibration.vibrate(this.state.Vibrationduration);
                             hideAndshow();
                         }
                     }

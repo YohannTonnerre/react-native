@@ -14,15 +14,15 @@ class homePage extends React.Component{
     return (
        
         <View style={styles.imgContainer}> 
-        <Image style={styles.imgCatcheur} source={require('../img/catcheur-milieu.png')}></Image>
-        <View style={styles.imgTextContainer}>
-            <TouchableOpacity>
-                <Image style={styles.imgText} source={require('../img/play.png')}/>  
-            </TouchableOpacity>  
-            <TouchableOpacity onPress={quit}>
-                <Image style={styles.imgText} source={require('../img/quit.png')}/>  
-            </TouchableOpacity> 
-        </View>
+            <Image style={styles.imgCatcheur} source={require('../img/catcheur-milieu.png')}></Image>
+            <View style={styles.imgTextContainer}>
+                <TouchableOpacity>
+                    <Image style={styles.imgText} source={require('../img/play.png')}/>  
+                </TouchableOpacity>  
+                <TouchableOpacity onPress={quit}>
+                    <Image style={styles.imgText} source={require('../img/quit.png')}/>  
+                </TouchableOpacity> 
+            </View>
         </View>
     );
     }
