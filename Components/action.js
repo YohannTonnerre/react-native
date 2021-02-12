@@ -41,6 +41,8 @@ class Action extends React.Component{
         const hideAndshow = ()=>{
             this.setState({
                 playAgain : true,
+                imageURL : require(`../img/catcheur-triste.png`),
+                imageAction : require(`../img/perdu.png`),
             });  
         }
 

@@ -1,22 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect, BackHandler } from 'react';
+import {  StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+
 
 
 
 class homePage extends React.Component{
 
     render () {
-        
+        const quit = ()=>{
+            BackHandler.exitApp();
+        }
     return (
        
-        <View>
-
-            
-            <TouchableOpacity onPress={this.props.navigation.navigate('Value')} style={styles.button}>
-                <Text style={styles.textButton}>JOUER</Text>
-            </TouchableOpacity>
-
+        <View style={styles.imgContainer}> 
+        <Image style={styles.imgCatcheur} source={require('../img/catcheur-milieu.png')}></Image>
+        <View style={styles.imgTextContainer}>
+            <TouchableOpacity>
+                <Image style={styles.imgText} source={require('../img/play.png')}/>  
+            </TouchableOpacity>  
+            <TouchableOpacity onPress={quit}>
+                <Image style={styles.imgText} source={require('../img/quit.png')}/>  
+            </TouchableOpacity> 
+        </View>
         </View>
     );
     }
@@ -25,19 +31,29 @@ class homePage extends React.Component{
 export default homePage
 
 const styles = StyleSheet.create({
-    homePage: {
-        marginTop : 50,     
-        color: '#FFF',
-        fontSize : 50,
+    
+    imgContainer:{
+        alignItems: "center", 
+        justifyContent: 'center',
     },
-
-    button: {
-        alignItems: "center",  
-        backgroundColor: '#fff',
-        color: '#000',
-        marginTop: 50,
-        padding: 15,
+    imgTextContainer:{
+        marginTop: '45%',
+    },
+    imgText: {
+        resizeMode: "contain",
+        height: 150,
+        width: 300,
+        
+    },
+    imgCatcheur:{
+        position: 'absolute',
+        alignSelf: 'center',
+        bottom: '18%',
+        height: 450,
+        width: 300,
     }
+    
+    
 
 
 });
