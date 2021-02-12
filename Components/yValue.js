@@ -42,7 +42,7 @@ export default function App() {
   );
 }
 
-
+// function permettant de multiplier par 100 la valeur de l'accelerometre
 function round(n) {
   if (!n) {
     return 0;
