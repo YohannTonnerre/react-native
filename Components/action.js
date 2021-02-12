@@ -26,16 +26,10 @@ class Action extends React.Component{
         ]
         this.actionDisplay = 0;
         this.actionArray = [];
-
         this.counter = 0;
         this.ready = true;
-
         this.win = false;
-
-        
         this.i = 0;
-
-
     }
 
     componentDidMount(){
@@ -45,10 +39,9 @@ class Action extends React.Component{
 
     render(){
         const hideAndshow = ()=>{
-            this.setState({text : 'perdu'});
             this.setState({
                 playAgain : true,
-            });
+            });  
         }
 
         const Load_New_Image=(pos)=>{
@@ -94,7 +87,6 @@ class Action extends React.Component{
         
 
         this.play = ()=>{
-            
             this.counter = 0;
             this.replay = setInterval(()=>{
                 this.counter++;
@@ -117,7 +109,6 @@ class Action extends React.Component{
                     this.win === true;
                     this.setState({score : this.state.score + 1});
                     if(this.state.score>this.state.bestScore){
-                        
                         this.setState({bestScore : this.state.bestScore + 1});
                     }
                     console.log(this.state.score);
@@ -144,7 +135,7 @@ class Action extends React.Component{
                             hideAndshow();
                         }
                     }
-                    if(this.actionArray[0] === "droite" && this.props.dataFromParent*100 > -120 && this.props.dataFromParent*100<-40){
+                    if(this.actionArray[0] === "droite"){
                         if(this.props.dataFromParent*100 > -120 && this.props.dataFromParent*100<-40){
                             spliceTab();
                         }
