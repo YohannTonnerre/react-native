@@ -27,18 +27,9 @@ export default function App() {
     );
   };
 
-
-  // function unsubscribe qui permet de desactiver le gyroscope
-  // const unsubscribe = () => {
-  //   subscription && subscription.remove();
-  //   setSubscription(null);
-  // };
-
-
   // equivalent à componentDidMount, componentDidUpdate, et componentWillUnmount.
   useEffect(() => {
     subscribe();
-    // return () => unsubscribe();
   }, []);
 
   
@@ -46,6 +37,7 @@ export default function App() {
   const { x } = data;
   return (
     <View>
+<<<<<<< HEAD
       {
          <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
       /* <Text style={styles.text}>Accelerometre:</Text>
@@ -58,12 +50,14 @@ export default function App() {
         </TouchableOpacity> */}
 
       </View>
+=======
+>>>>>>> 305db9faa54ec2903199d5f44dd5f6bf9cedf8f1
       <Action dataFromParent = {x}/>
     </View>
   );
 }
 
-
+// function permettant de multiplier par 100 la valeur de l'accelerometre
 function round(n) {
   if (!n) {
     return 0;
