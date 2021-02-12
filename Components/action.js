@@ -8,7 +8,13 @@ class Action extends React.Component{
 
     constructor(props){
         super(props);
-
+        // Déclaration de state dans lequel se trouve les textes générés dynamiquement,
+        // l'url des image du catcheur et les images des ordres,
+        // La variable pour savoir si l'utilisateur appuie sur rejouer,
+        // La variable permettant de changer l opacity des ordres,
+        // le score,
+        //  le meilleur score,
+        // Et la durée de la vibration
         this.state = {
             text: "action",
             imageURL : require('../img/fakeScreen.png'),
@@ -20,25 +26,42 @@ class Action extends React.Component{
             vibrationDuration: 500,
         }
 
+        // Le tableau contenant les differentes actions possibles
+
         this.action = [
             "droite",
             "gauche",
             "milieu",
         ]
+
+        // La variable permettant d afficher l action à effectué
         this.actionDisplay = 0;
+
+        // Le tableau contenant la liste des actions à faire
         this.actionArray = [];
+
+        // La variable permettant de generer 3 actions a chaque fois
         this.counter = 0;
+
+        // Variable servant à relancer la boucle
         this.ready = true;
+
+        // Variable servant à detecter si l'utilisateur a reussi à faire un tour
         this.win = false;
-        this.i = 0;
     }
 
+
+    // Quand l'interface a chargé,
+    // on change le state de text en la valeur de this.actionDisplay
+    // et on lance le jeu
     componentDidMount(){
         this.setState({text : this.actionDisplay});
         this.play();
     }
 
     render(){
+        // function qui se lance quand l'utilisateur perd,
+        // Changement des state playAgain, imageURL et imageAction
         const hideAndshow = ()=>{
             this.setState({
                 
@@ -48,6 +71,8 @@ class Action extends React.Component{
             });  
         }
 
+        // Function qui change l image en function de la position demandée avec une petite transition 
+        // qui change l opacity de l image
         const Load_New_Image=(pos)=>{
             this.setState({
                 visible : 0,
@@ -77,6 +102,7 @@ class Action extends React.Component{
             },100)          
         }
 
+        // La function pour rejouer
         this.playAgainFunction = ()=>{
             this.actionArray = [];
             this.setState({
@@ -89,7 +115,7 @@ class Action extends React.Component{
             },4000)
         }
         
-
+        // la function pour jouer qui genere les trois actions à effectuer)
         this.play = ()=>{
             this.counter = 0;
             this.replay = setInterval(()=>{
@@ -105,7 +131,8 @@ class Action extends React.Component{
                 }
             },1000)
         }
-    
+        
+        // La function qui permet de supprimer la reponse du tableau
         const spliceTab = ()=>{
             setTimeout(()=>{
                 this.actionArray.splice(0,1);
@@ -126,6 +153,8 @@ class Action extends React.Component{
                 }
             })
         }
+
+        // La function qui check les reponse de l'utilisateur
         setTimeout(()=>{
             this.win = false;
             if(this.ready){

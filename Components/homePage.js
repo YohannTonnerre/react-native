@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect, BackHandler } from 'react';
+import React, { useState, useEffect } from 'react';
 import {  StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 
 
@@ -8,23 +8,20 @@ import {  StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 class homePage extends React.Component{
 
     render () {
-        const quit = ()=>{
-            BackHandler.exitApp();
-        }
-    return (
-       
-        <View style={styles.imgContainer}> 
-            <Image style={styles.imgCatcheur} source={require('../img/catcheur-milieu.png')}></Image>
-            <View style={styles.imgTextContainer}>
-                <TouchableOpacity>
-                    <Image style={styles.imgText} source={require('../img/play.png')}/>  
-                </TouchableOpacity>  
-                <TouchableOpacity onPress={quit}>
-                    <Image style={styles.imgText} source={require('../img/quit.png')}/>  
-                </TouchableOpacity> 
+        return (
+        
+            <View style={styles.imgContainer}> 
+                <Image style={styles.imgCatcheur} source={require('../img/catcheur-milieu.png')}></Image>
+                <View style={styles.imgTextContainer}>
+                    <TouchableOpacity>
+                        <Image style={styles.imgText} source={require('../img/play.png')}/>  
+                    </TouchableOpacity>  
+                    <TouchableOpacity onPress={quit}>
+                        <Image style={styles.imgText} source={require('../img/quit.png')}/>  
+                    </TouchableOpacity> 
+                </View>
             </View>
-        </View>
-    );
+        );
     }
 }
 
