@@ -6,14 +6,14 @@ import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 class homePage extends React.Component{
 
-    render ( ) {
+    render () {
         
     return (
        
         <View>
 
             
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={this.props.navigation.navigate('Value')} style={styles.button}>
                 <Text style={styles.textButton}>JOUER</Text>
             </TouchableOpacity>
 
@@ -38,5 +38,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         padding: 15,
     }
- });
+
+
+});
 
